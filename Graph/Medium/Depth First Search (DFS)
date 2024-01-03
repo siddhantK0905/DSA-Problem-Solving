@@ -1,0 +1,39 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+  public:
+    // Function to return a list containing the DFS traversal of the graph.
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        // Code here
+        int vis[V] = {0};
+        int start = 0;
+        
+        vector<int> list;
+        
+        dfs(start,vis,list, adj);
+        
+        return list;
+    }
+    
+    void dfs(int node, int vis[], vector<int>& list, vector<int> adj[]){
+            
+        vis[node] = 1;
+        list.push_back(node);
+        
+        for(auto it: adj[node]){
+            
+            if(vis[it]!= 1){
+                
+                dfs(it, vis, list, adj);
+            }
+        }
+    }
+};
+
+//TC - O(N) + O(2E) for undirected graph
+//SC -O(N)
+
+
