@@ -1,0 +1,30 @@
+#include<unordered_map>
+class Solution {
+public:
+    int minOperations(vector<int>& nums) {
+     int count =0;
+     unordered_map<int,int> mp;
+     for(int i=0; i<nums.size(); i++){
+         mp[nums[i]]++;
+     }
+     for(auto it:mp){
+         int val = it.second;
+
+         if(val > 3 && val % 3 == 1){
+             count += (val/3) -1;
+             val = 4;
+         }
+         if(val%3 == 0 || val%3 == 2){
+             count += val/3;
+             val = val%3;
+         }
+         count += val/2;
+         val = val%2;
+         if(val == 1) return -1; 
+     }  
+     return count;
+    }
+
+    //SC -O(N)
+    //TC - O(N)
+};
