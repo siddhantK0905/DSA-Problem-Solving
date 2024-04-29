@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        int totalXor =0;
+
+        //Make the XOR op of all numbers
+        for(int &i : nums){
+            totalXor ^= i;
+        }
+        //XOR of total and k
+        int diff = totalXor ^ k;
+
+        //Function return the number of 1 in binary
+        return __builtin_popcount(diff);
+    }
+};
+
+// TC - O(n)
+// SC - O(1)
