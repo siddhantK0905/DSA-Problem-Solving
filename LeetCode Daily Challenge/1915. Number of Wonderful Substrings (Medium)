@@ -1,0 +1,39 @@
+class Solution {
+public:
+    long long wonderfulSubstrings(string word) {
+        long long result = 0;
+        unordered_map < long long, long long> mp;
+
+        int cum_xor = 0;
+        //setting cum_xor=0 value 1 in map
+        mp[cum_xor] =1;
+
+        for(char &ch : word){
+
+            //Getting binary representation of character
+            int shift = ch - 'a';
+
+            //XOR operation of cum_xor with new character
+            cum_xor ^= (1 << shift);
+
+
+            result += mp[cum_xor]; // All character even in count
+
+            for(char ch1= 'a'; ch1 <= 'j'; ch1++){
+
+                int shift = ch1 - 'a';
+
+                long long check_xor = ( cum_xor ^ (1 << shift) );
+
+                result += mp[check_xor];  //for character with at most 1 even count
+            }
+
+            mp[cum_xor] ++;
+        }
+
+        return result;
+    }
+};
+
+//TC - O(N)
+//SC - O(N)
